@@ -32,4 +32,6 @@ WORKDIR /workspace
 COPY --from=builder /build/jeepay-${PLATFORM}/target/jeepay-${PLATFORM}.jar ./app.jar
 
 # docker-compose 会挂载 application.yml 到 /workspace/application.yml
-CMD ["java", "-jar", "app.jar"]
+# 添加 JVM 参数限制内存使用，避免占用过多资源
+# -Xms: 初始堆内存, -Xmx: 最大堆内存, -XX:+UseG1GC: 使用 G1 垃圾回收器
+CMD ["java", "-Xms256m", "-Xmx512m", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=200", "-jar", "app.jar"]

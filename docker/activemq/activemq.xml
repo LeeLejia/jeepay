@@ -155,7 +155,8 @@
 
         Take a look at ${ACTIVEMQ_HOME}/conf/jetty.xml for more details
     -->
-    <import resource="jetty.xml"/>
+    <!-- 注意：ActiveMQ 5.19.1 中 Web Console 存在兼容性问题，已禁用以避免启动错误 -->
+    <!-- <import resource="jetty.xml"/> -->
 
 </beans>
         <!-- END SNIPPET: example -->

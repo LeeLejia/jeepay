@@ -34,10 +34,10 @@ spring:
     username: root
     password: rootroot
     druid:
-      # 连接池配置项
-      initial-size: 5 #初始化时建立物理连接的个数
-      min-idle: 5 #最小连接池数量
-      max-active: 30 #最大连接池数量
+      # 连接池配置项（低资源消耗配置：针对最多5个并发）
+      initial-size: 2 #初始化时建立物理连接的个数
+      min-idle: 2 #最小连接池数量
+      max-active: 10 #最大连接池数量
       max-wait: 60000 #获取连接时最大等待时间，单位毫秒
       # 检测相关
       test-while-idle: true # 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。

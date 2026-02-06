@@ -32,9 +32,10 @@ services:
     networks:
       jeepay:
         ipv4_address: 172.25.0.10
-    cpus: '1.0'
-    mem_limit: 1g
-    mem_reservation: 512m
+    command: --innodb-buffer-pool-size=256M --max-connections=50 --table-open-cache=200
+    cpus: '0.3'
+    mem_limit: 512m
+    mem_reservation: 256m
     restart: unless-stopped
   activemq:
     build:
@@ -56,9 +57,9 @@ services:
     networks:
       jeepay:
         ipv4_address: 172.25.0.11
-    cpus: '0.5'
-    mem_limit: 512m
-    mem_reservation: 256m
+    cpus: '0.2'
+    mem_limit: 256m
+    mem_reservation: 128m
     restart: unless-stopped
   # 扩展额外延迟插件的 RabbitMQ
   #rabbitmq:
@@ -124,9 +125,9 @@ services:
         ipv4_address: 172.25.0.12
     volumes:
       - redis:/data
-    cpus: '0.5'
-    mem_limit: 256m
-    mem_reservation: 128m
+    cpus: '0.2'
+    mem_limit: 128m
+    mem_reservation: 64m
     restart: unless-stopped
   payment:
     build:
@@ -154,9 +155,9 @@ services:
       - ./logs/payment:/workspace/logs
       - ./uploads/payment:/workspace/uploads
       - ./conf/payment/application.yml:/workspace/application.yml
-    cpus: '1.0'
-    mem_limit: 768m
-    mem_reservation: 512m
+    cpus: '0.3'
+    mem_limit: 512m
+    mem_reservation: 384m
     restart: unless-stopped
   manager:
     build:
@@ -184,9 +185,9 @@ services:
       - ./logs/manager:/workspace/logs
       - ./uploads/manager:/workspace/uploads
       - ./conf/manager/application.yml:/workspace/application.yml
-    cpus: '1.0'
-    mem_limit: 768m
-    mem_reservation: 512m
+    cpus: '0.3'
+    mem_limit: 512m
+    mem_reservation: 384m
     restart: unless-stopped
   merchant:
     build:
@@ -214,9 +215,9 @@ services:
       - ./logs/merchant:/workspace/logs
       - ./uploads/merchant:/workspace/uploads
       - ./conf/merchant/application.yml:/workspace/application.yml
-    cpus: '1.0'
-    mem_limit: 768m
-    mem_reservation: 512m
+    cpus: '0.3'
+    mem_limit: 512m
+    mem_reservation: 384m
     restart: unless-stopped
   ui-payment:
     profiles:

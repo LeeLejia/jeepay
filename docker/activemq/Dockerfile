@@ -1,12 +1,12 @@
 FROM bellsoft/liberica-openjdk-alpine:13
 
-ENV ACTIVEMQ_VERSION 5.16.4
+ENV ACTIVEMQ_VERSION 5.19.1
 ENV ACTIVEMQ apache-activemq-$ACTIVEMQ_VERSION
 ENV ACTIVEMQ_HOME /opt/activemq
 
-# 使用国内镜像源，避免 archive.apache.org 连接超时
-# 可选: mirrors.aliyun.com | mirrors.tuna.tsinghua.edu.cn | mirrors.cloud.tencent.com
-ARG ACTIVEMQ_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/apache/activemq
+# 使用 5.19.1（国内镜像有），5.16.4 仅在 archive.apache.org 且国内常超时
+# 可选: mirrors.aliyun.com | mirrors.tuna.tsinghua.edu.cn
+ARG ACTIVEMQ_MIRROR=https://mirrors.aliyun.com/apache/activemq
 RUN apk add --update curl && \
     rm -rf /var/cache/apk/* && \
     mkdir -p /opt && \

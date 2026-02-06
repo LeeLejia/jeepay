@@ -4,10 +4,14 @@ ENV ACTIVEMQ_VERSION 5.16.4
 ENV ACTIVEMQ apache-activemq-$ACTIVEMQ_VERSION
 ENV ACTIVEMQ_HOME /opt/activemq
 
+# 使用国内镜像源，避免 archive.apache.org 连接超时
+# 可选: mirrors.aliyun.com | mirrors.tuna.tsinghua.edu.cn | mirrors.cloud.tencent.com
+ARG ACTIVEMQ_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/apache/activemq
 RUN apk add --update curl && \
     rm -rf /var/cache/apk/* && \
     mkdir -p /opt && \
-    curl -s -S https://archive.apache.org/dist/activemq/$ACTIVEMQ_VERSION/$ACTIVEMQ-bin.tar.gz | tar -xvz -C /opt && \
+    curl -fsSL ${ACTIVEMQ_MIRROR}/${ACTIVEMQ_VERSION}/${ACTIVEMQ}-bin.tar.gz -o /tmp/activemq.tar.gz && \
+    tar -xzf /tmp/activemq.tar.gz -C /opt && rm /tmp/activemq.tar.gz && \
     ln -s /opt/$ACTIVEMQ $ACTIVEMQ_HOME && \
     addgroup -S activemq && \
     adduser -S -H -G activemq -h $ACTIVEMQ_HOME activemq && \

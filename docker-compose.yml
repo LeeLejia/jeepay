@@ -32,10 +32,10 @@ services:
     networks:
       jeepay:
         ipv4_address: 172.25.0.10
-    command: --innodb-buffer-pool-size=256M --max-connections=50 --table-open-cache=200
-    cpus: '0.3'
-    mem_limit: 512m
-    mem_reservation: 256m
+    command: --innodb-buffer-pool-size=128M --max-connections=30 --table-open-cache=100 --thread-cache-size=8 --query-cache-size=0 --query-cache-type=0
+    cpus: '0.25'
+    mem_limit: 384m
+    mem_reservation: 192m
     restart: unless-stopped
   activemq:
     build:
@@ -125,9 +125,9 @@ services:
         ipv4_address: 172.25.0.12
     volumes:
       - redis:/data
-    cpus: '0.2'
-    mem_limit: 128m
-    mem_reservation: 64m
+    cpus: '0.1'
+    mem_limit: 96m
+    mem_reservation: 48m
     restart: unless-stopped
   payment:
     build:
@@ -155,9 +155,9 @@ services:
       - ./logs/payment:/workspace/logs
       - ./uploads/payment:/workspace/uploads
       - ./conf/payment/application.yml:/workspace/application.yml
-    cpus: '0.3'
-    mem_limit: 512m
-    mem_reservation: 384m
+    cpus: '0.25'
+    mem_limit: 384m
+    mem_reservation: 256m
     restart: unless-stopped
   manager:
     build:
@@ -185,9 +185,9 @@ services:
       - ./logs/manager:/workspace/logs
       - ./uploads/manager:/workspace/uploads
       - ./conf/manager/application.yml:/workspace/application.yml
-    cpus: '0.3'
-    mem_limit: 512m
-    mem_reservation: 384m
+    cpus: '0.25'
+    mem_limit: 384m
+    mem_reservation: 256m
     restart: unless-stopped
   merchant:
     build:
@@ -215,9 +215,9 @@ services:
       - ./logs/merchant:/workspace/logs
       - ./uploads/merchant:/workspace/uploads
       - ./conf/merchant/application.yml:/workspace/application.yml
-    cpus: '0.3'
-    mem_limit: 512m
-    mem_reservation: 384m
+    cpus: '0.25'
+    mem_limit: 384m
+    mem_reservation: 256m
     restart: unless-stopped
   ui-payment:
     profiles:

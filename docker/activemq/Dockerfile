@@ -25,4 +25,6 @@ EXPOSE 1883 5672 8161 61613 61614 61616
 USER activemq
 WORKDIR $ACTIVEMQ_HOME
 
+# 优化 JVM 参数以降低内存占用
+ENV ACTIVEMQ_OPTS="-Xms64M -Xmx128M -XX:+UseSerialGC -XX:MaxMetaspaceSize=64m"
 CMD ["/bin/sh", "-c", "bin/activemq console"]
